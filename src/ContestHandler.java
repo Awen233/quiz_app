@@ -49,7 +49,7 @@ public class ContestHandler extends Thread {
 				new ContestantHandler(clientSocket, this).start();
 			}
 		} catch (SocketTimeoutException e1) {
-
+			System.out.println("contest start");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,14 +85,12 @@ public class ContestHandler extends Thread {
 
 	public synchronized void increment() {
 		tempNum++;
-		System.out.println("increment called " + tempNum + " tempNum, " + numOfPlayer + "players");
 		if(tempNum == numOfPlayer) {
 			synchronized(lock) {
 				ready = true;
 				contest.questionHist.put(contest.question.get(index), correct * 100/numOfPlayer);
 				index++;
 				tempNum = 0;
-				System.out.println("notifyall");
 				lock.notifyAll();
 			}
 			
@@ -146,7 +144,6 @@ class ContestantHandler extends Thread {
 			while(!callBack.checkName(name)) {
 				out.println("Wrong");
 				name = in.next();
-				System.out.println(name);
 			}
 			out.println("ok");
 			out.println(callBack.contest.question.size());
@@ -175,9 +172,7 @@ class ContestantHandler extends Thread {
 
 	public void handleQuestion(Question q) {
 		printQuestion(q);
-		System.out.println("wait for ans");
 		String ans = in.next();
-		System.out.println("ans is: " + ans);
 		if(ans.compareTo(q.correctRes) == 0) {
 			score++;
 			start = "Correct";

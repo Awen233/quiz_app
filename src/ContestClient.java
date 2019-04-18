@@ -26,8 +26,6 @@ public class ContestClient {
 		} catch (Exception e) {
 			System.out.println("Error: invalid port number: " + args[1]);
 		}
-
-
 	}
 
 	private void startAction() {

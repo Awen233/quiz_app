@@ -34,7 +34,6 @@ public class meisterClient {
 				readServer();
 			} else if(choice.compareTo("g") == 0) {
 				out.println("get");
-				System.out.print(input[1]);
 				out.println(Integer.parseInt(input[1]));
 				readServer();
 			} else if(choice.compareTo("d") == 0) {
@@ -97,7 +96,6 @@ public class meisterClient {
 			e.printStackTrace();
 		}
 		readServer();
-		System.out.println(question.questionText);
 	}
 
 	private static Question modelQuestion() {

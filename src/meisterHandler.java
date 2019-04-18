@@ -96,7 +96,7 @@ class meisterHandler extends Thread{
 	private void handleBegin() {
 		int num = in.nextInt();
 		if(!contests.containsKey(num)) {
-			out.println("not contest found");
+			out.println("Error: contest " + num + " not found");
 			return;
 		}
 		int portNum = 0;
@@ -162,16 +162,18 @@ class meisterHandler extends Thread{
 	}
 
 	private void printQuestion(Question question) {
-		out.println(question.tag);
-		out.println(question.questionText);
-		out.println(".");
+		StringBuilder sb = new StringBuilder();
+		sb.append(question.tag + "\n");
+		sb.append(question.questionText + "\n");
+		sb.append("." + "\n");
 		List<String> choices = question.choice;
 		for(String s : choices) {
-			out.println(s);
-			out.println(".");
+			sb.append(s + "\n");
+			sb.append("." + "\n");
 		}
-		out.println(".");
-		out.println(question.correctRes);
+		sb.append("." + "\n");
+		sb.append(question.correctRes);
+		out.println(sb.toString());
 	}
 
 	private void handleList() {
